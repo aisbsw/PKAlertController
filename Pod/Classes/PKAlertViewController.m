@@ -206,15 +206,27 @@ static const NSInteger ContentClipViewTag = 15;
     NSLayoutConstraint *centerYConstraint = [self centerYConstraint];
     self.changeableLayoutConstraints = @[centerYConstraint];
 
-    [constraints addObjectsFromArray:@[
-         centerYConstraint,
-         [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:superview
-          attribute:NSLayoutAttributeLeft multiplier:1. constant:self.alertOffset],
-         [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:superview
-          attribute:NSLayoutAttributeRight multiplier:1. constant:-self.alertOffset],
-         [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:
-          superview attribute:NSLayoutAttributeTop multiplier:1. constant:self.alertTopOffset],
-     ]];
+    if (@available(iOS 11, *)) {
+        [constraints addObjectsFromArray:@[
+                                           centerYConstraint,
+                                           [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:superview.safeAreaLayoutGuide
+                                                                        attribute:NSLayoutAttributeLeft multiplier:1. constant:self.alertOffset],
+                                           [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:superview.safeAreaLayoutGuide
+                                                                        attribute:NSLayoutAttributeRight multiplier:1. constant:-self.alertOffset],
+                                           [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:
+                                            superview attribute:NSLayoutAttributeTop multiplier:1. constant:self.alertTopOffset],
+                                           ]];
+    }else {
+        [constraints addObjectsFromArray:@[
+                                           centerYConstraint,
+                                           [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:superview
+                                                                        attribute:NSLayoutAttributeLeft multiplier:1. constant:self.alertOffset],
+                                           [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:superview
+                                                                        attribute:NSLayoutAttributeRight multiplier:1. constant:-self.alertOffset],
+                                           [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:
+                                            superview attribute:NSLayoutAttributeTop multiplier:1. constant:self.alertTopOffset],
+                                           ]];
+    }
     return constraints;
 }
 
