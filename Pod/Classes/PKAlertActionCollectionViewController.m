@@ -121,13 +121,13 @@ static NSString * const reuseIdentifier = @"PKAlertViewControllerCellReuseIdenti
 
 #pragma mark <UICollectionViewDelegateFlowLayout>
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGSize itemSize = [(UICollectionViewFlowLayout *)collectionViewLayout itemSize];
-    itemSize.width = collectionView.bounds.size.width;
-    if (self.actions.count == 2) {
-        itemSize.width /= 2.0;
-    }
-    return itemSize;
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    CGSize itemSize = [(UICollectionViewFlowLayout *)collectionViewLayout itemSize];
+//    itemSize.width = collectionView.bounds.size.width;
+//    if (self.actions.count == 2) {
+//        itemSize.width /= 2.0;
+//    }
+//    return itemSize;
+//}
 
 @end
